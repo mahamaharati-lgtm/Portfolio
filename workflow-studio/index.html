@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workflow Studio — Enterprise Approval Workflow Builder</title>
+    <meta
+      name="description"
+      content="Design, validate, publish and simulate approval workflows such as purchase, leave and expense approvals. An accessible browser-based workflow builder demo."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1216" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var pref = 'system';
+        try {
+          var stored = localStorage.getItem('ws-theme');
+          if (stored === 'light' || stored === 'dark' || stored === 'system') pref = stored;
+        } catch (e) {}
+        var dark =
+          pref === 'dark' ||
+          (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var root = document.documentElement;
+        root.dataset.theme = dark ? 'dark' : 'light';
+        root.dataset.themePreference = pref;
+        root.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Workflow Studio needs JavaScript enabled to run the workflow editor.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
