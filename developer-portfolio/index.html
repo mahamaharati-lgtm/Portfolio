@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harshith C Shenoy — Frontend Software Engineer</title>
+    <meta
+      name="description"
+      content="Harshith C Shenoy is a frontend software engineer in Bengaluru building accessible, responsive React and TypeScript interfaces."
+    />
+    <meta name="author" content="Harshith C Shenoy" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f3ee" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111214" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Harshith C Shenoy — Frontend Software Engineer" />
+    <meta
+      property="og:description"
+      content="Frontend software engineer building accessible, responsive React and TypeScript interfaces."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var pref = 'system';
+        try {
+          var stored = localStorage.getItem('hcs-theme');
+          if (stored === 'light' || stored === 'dark' || stored === 'system') pref = stored;
+        } catch (e) {}
+        var dark =
+          pref === 'dark' ||
+          (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var root = document.documentElement;
+        root.dataset.theme = dark ? 'dark' : 'light';
+        root.dataset.themePreference = pref;
+        root.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harshith C Shenoy",
+        "jobTitle": "Frontend Software Engineer",
+        "email": "mailto:harshithcshenoy@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bengaluru",
+          "addressRegion": "Karnataka",
+          "addressCountry": "IN"
+        },
+        "alumniOf": "Visvesvaraya Technological University",
+        "sameAs": ["https://github.com/mahamaharati-lgtm"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+  </body>
+</html>
