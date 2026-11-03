@@ -1,0 +1,43 @@
+{
+  "name": "HARSHITH C SHENOY",
+  "headline": "Frontend Software Engineer | React Developer | UI/UX Engineering",
+  "contact": {
+    "location": "Bengaluru, Karnataka",
+    "phone": "+91 9342036381",
+    "email": "harshithcshenoy@gmail.com",
+    "github": "github.com/mahamaharati-lgtm",
+    "linkedin": null
+  },
+  "summary": "Frontend Software Engineer working with React.js and TypeScript since July 2025, currently an Associate Software Engineer (Frontend) at Pivot Path. Skilled in building responsive, accessible user interfaces with Material UI and Tailwind CSS, integrating REST APIs, and working in Agile/Scrum teams. Built Workflow Studio, an accessible React and TypeScript workflow builder covered by automated unit, end-to-end and accessibility tests.",
+  "skills": [
+    ["Languages", "JavaScript (ES6+), TypeScript, HTML5, CSS3, Python, C, SQL"],
+    ["Frameworks & Libraries", "React.js, Material UI, Tailwind CSS"],
+    ["UI Engineering", "Responsive Design, UI/UX Implementation, Accessibility (WCAG), REST APIs"],
+    ["Tools", "Git, GitHub, Chrome DevTools, VS Code"],
+    ["Methodologies", "Agile/Scrum"]
+  ],
+  "experience": [
+    { "title": "Associate Software Engineer (Frontend)", "company": "Pivot Path", "dates": "Jul 2026 – Present", "bullets": [] },
+    { "title": "Associate Software Engineer (Frontend)", "company": "Neviton", "dates": "Jan 2026 – Jun 2026", "bullets": [] },
+    { "title": "Frontend Developer Intern", "company": "Neviton", "dates": "Jul 2025 – Dec 2025", "bullets": [] }
+  ],
+  "projects": [
+    {
+      "name": "Workflow Studio — Enterprise Workflow Builder",
+      "tech": "React, TypeScript, Vite, Tailwind CSS, XYFlow, Zustand, React Hook Form, Zod, Vitest, Playwright, axe-core",
+      "links": [
+        ["GitHub", "github.com/mahamaharati-lgtm/portfolio/tree/main/workflow-studio"]
+      ],
+      "bullets": [
+        "Built a drag-and-drop approval workflow builder with Start, Task, Approval, Decision, Notification and End steps using React, TypeScript and XYFlow, with undo/redo, zoom, fit-to-view, browser persistence and JSON import/export.",
+        "Implemented business-rule validation (single start step, reachable end steps, required approver roles, valid decision branches, unreachable steps and loop detection) that blocks publishing of invalid workflows.",
+        "Developed a simulation engine that routes requests by configurable conditions, such as sending purchases above ₹50,000 to finance approval, and records a complete action history.",
+        "Targeted WCAG 2.1 AA with keyboard alternatives to drag-and-drop, accessible dialogs, live-region status messages and Light, Dark and System themes; axe-core reports 0 violations across key screens.",
+        "Wrote 44 Vitest and React Testing Library tests and 29 Playwright end-to-end, accessibility and responsive tests, run in GitHub Actions CI."
+      ]
+    }
+  ],
+  "education": [
+    { "degree": "Bachelor of Engineering, Information Science and Engineering", "institution": "Visvesvaraya Technological University", "dates": "2025", "score": "82%" }
+  ]
+}
