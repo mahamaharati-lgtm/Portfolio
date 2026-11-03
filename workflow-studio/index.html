@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workflow Studio — Enterprise Approval Workflow Builder</title>
+    <meta
+      name="description"
+      content="Design, validate, publish and simulate approval workflows such as purchase, leave and expense approvals. An accessible browser-based workflow builder demo."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7f9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1216" />
+    <link rel="icon" type="image/svg+xml" href="/Portfolio/workflow-studio/favicon.svg" />
+    <script>
+      (function () {
+        // GitHub Pages SPA fallback: 404.html redirects deep links to ?p=<path>; restore it here.
+        var m = location.search.match(/[?&]p=([^&]*)/);
+        if (m) {
+          var target = decodeURIComponent(m[1]);
+          if (target.charAt(0) === '/' && target.charAt(1) !== '/')
+            history.replaceState(null, '', target);
+        }
+        var pref = 'system';
+        try {
+          var stored = localStorage.getItem('ws-theme');
+          if (stored === 'light' || stored === 'dark' || stored === 'system') pref = stored;
+        } catch (e) {}
+        var dark =
+          pref === 'dark' ||
+          (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var root = document.documentElement;
+        root.dataset.theme = dark ? 'dark' : 'light';
+        root.dataset.themePreference = pref;
+        root.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <script type="module" crossorigin src="/Portfolio/workflow-studio/assets/index-4-I0osgq.js"></script>
+    <link rel="stylesheet" crossorigin href="/Portfolio/workflow-studio/assets/index-DUCrtu3N.css">
+  </head>
+  <body>
+    <noscript>Workflow Studio needs JavaScript enabled to run the workflow editor.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
