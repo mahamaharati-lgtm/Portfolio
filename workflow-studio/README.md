@@ -1,5 +1,7 @@
 # Workflow Studio
 
+**Live:** https://mahamaharati-lgtm.github.io/Portfolio/workflow-studio/
+
 An accessible, browser-based builder for enterprise approval workflows: purchase approvals, leave requests, expense reimbursements, document sign-off and IT change requests.
 
 Design a workflow on a canvas (or as a structured list), check it against business rules, publish it, and simulate a real request step by step, with a full audit-style history.
@@ -149,7 +151,11 @@ npm run dev          # http://localhost:5173
 | `npm run test:e2e`                      | Playwright e2e, axe, theme, keyboard and responsive tests (builds and serves automatically) |
 | `npm run screenshots`                   | Regenerate `docs/screenshots` (needs a preview server on port 4173)                         |
 
-## Deployment (Cloudflare Pages)
+## Deployment
+
+The live site is published to GitHub Pages by the repository's `deploy-pages` workflow (see the root README). To deploy this app on its own to Cloudflare Pages instead, use:
+
+### Cloudflare Pages
 
 | Setting              | Value             |
 | -------------------- | ----------------- |

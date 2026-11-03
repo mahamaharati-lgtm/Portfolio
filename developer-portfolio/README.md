@@ -1,5 +1,7 @@
 # Harshith C Shenoy — Developer Portfolio
 
+**Live:** https://mahamaharati-lgtm.github.io/Portfolio/
+
 Personal portfolio of **Harshith C Shenoy**, Frontend Software Engineer (React · TypeScript · UI/UX engineering), with an in-depth case study of [Workflow Studio](../workflow-studio).
 
 ![Portfolio home page in light mode](docs/screenshots/home-light.png)
@@ -69,7 +71,11 @@ Optional build-time environment variables:
 
 These were measured against `vite preview` in headless Chromium. Scores on the deployed site may differ.
 
-## Deployment (Cloudflare Pages)
+## Deployment
+
+The live site is published to GitHub Pages by the repository's `deploy-pages` workflow (see the root README). To deploy this app on its own to Cloudflare Pages instead, use:
+
+### Cloudflare Pages
 
 | Setting               | Value                                                                        |
 | --------------------- | ---------------------------------------------------------------------------- |

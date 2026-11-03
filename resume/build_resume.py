@@ -20,7 +20,10 @@ FILE_STEM = "Harshith-C-Shenoy-Resume"
 
 
 def contact_items(c):
-    items = [c["location"], c["phone"], c["email"], c["github"]]
+    items = [c["location"], c["phone"], c["email"]]
+    if c.get("portfolio"):
+        items.append(c["portfolio"])
+    items.append(c["github"])
     if c.get("linkedin"):
         items.append(c["linkedin"])
     return items
@@ -34,7 +37,7 @@ def e(s):
 def link(text):
     if "@" in text:
         return f'<a href="mailto:{e(text)}">{e(text)}</a>'
-    if "." in text and "/" in text:
+    if "." in text and ("/" in text or text.endswith(".io")):
         return f'<a href="https://{e(text)}">{e(text)}</a>'
     return e(text)
 
