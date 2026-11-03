@@ -366,8 +366,12 @@
     display: flex;
     gap: 0.25rem;
     border-bottom: 1px solid var(--border);
+    overflow-x: auto; /* never force page-level horizontal scrolling */
+    scrollbar-width: thin;
   }
   .tab {
+    position: relative; /* contains sr-only badge text */
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -385,6 +389,11 @@
   }
   .tab:hover {
     color: var(--fg);
+  }
+  @media (max-width: 400px) {
+    .tab {
+      padding-inline: 0.55rem;
+    }
   }
   .tab[aria-selected='true'] {
     color: var(--fg);
