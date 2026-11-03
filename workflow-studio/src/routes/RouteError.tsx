@@ -19,7 +19,7 @@ export function RouteError() {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => window.location.assign('/')}
+          onClick={() => window.location.assign(import.meta.env.BASE_URL)}
         >
           Reload Workflow Studio
         </button>

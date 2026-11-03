@@ -16,26 +16,32 @@ function EditorLoading() {
   );
 }
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <AppShell />,
-    errorElement: <RouteError />,
-    children: [
-      { index: true, element: <WorkflowsPage /> },
-      {
-        path: 'workflows/:id',
-        element: (
-          <Suspense fallback={<EditorLoading />}>
-            <EditorPage />
-          </Suspense>
-        ),
-      },
-      { path: 'about', element: <AboutPage /> },
-      { path: '*', element: <NotFoundPage /> },
-    ],
-  },
-]);
+// BASE_URL is '/' locally and '/Portfolio/workflow-studio/' on GitHub Pages.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <AppShell />,
+      errorElement: <RouteError />,
+      children: [
+        { index: true, element: <WorkflowsPage /> },
+        {
+          path: 'workflows/:id',
+          element: (
+            <Suspense fallback={<EditorLoading />}>
+              <EditorPage />
+            </Suspense>
+          ),
+        },
+        { path: 'about', element: <AboutPage /> },
+        { path: '*', element: <NotFoundPage /> },
+      ],
+    },
+  ],
+  { basename },
+);
 
 export function App() {
   return <RouterProvider router={router} />;

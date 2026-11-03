@@ -1,3 +1,5 @@
+import { withBase } from '../lib/url';
+
 /**
  * Single source of truth for personal and professional facts shown on the site.
  * Only verified information belongs here — do not add achievements, metrics or
@@ -22,8 +24,8 @@ export const profile = {
   github: 'https://github.com/mahamaharati-lgtm',
   /** Add only once verified. */
   linkedin: null as string | null,
-  resumePdf: '/resume/Harshith-C-Shenoy-Resume.pdf',
-  resumeDocx: '/resume/Harshith-C-Shenoy-Resume.docx',
+  resumePdf: withBase('resume/Harshith-C-Shenoy-Resume.pdf'),
+  resumeDocx: withBase('resume/Harshith-C-Shenoy-Resume.docx'),
 } as const;
 
 export const experience: Role[] = [

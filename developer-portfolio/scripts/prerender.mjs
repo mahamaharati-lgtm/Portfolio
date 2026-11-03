@@ -10,12 +10,18 @@ const ssrEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 const { render, PAGE_META } = await import(pathToFileURL(ssrEntry).href);
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 const siteUrl = (process.env.SITE_URL ?? '').replace(/\/$/, '');
+const base = process.env.BASE_PATH ?? '/';
+// Optional GitHub Pages SPA fallback: deep links under this prefix are sent to that app's index.
+const spaPrefix = process.env.SPA_FALLBACK_PREFIX ?? '';
 
 // Preload the primary latin font so text doesn't reflow when it swaps in.
 const fonts = fs
   .readdirSync(path.join(dist, 'assets'))
   .filter((f) => /^geist(-mono)?-latin-wght-normal-.*\.woff2$/.test(f))
-  .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin />`)
+  .map(
+    (f) =>
+      `<link rel="preload" href="${base}assets/${f}" as="font" type="font/woff2" crossorigin />`,
+  )
   .join('\n    ');
 
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -45,6 +51,10 @@ for (const route of routes) {
       /(<meta\s+property="og:description"\s+content=")[^"]*(")/,
       `$1${escape(route.meta.description)}$2`,
     );
+  if (spaPrefix && route.url === '/404') {
+    const redirect = `<script>(function(){var p=location.pathname;if(p.indexOf(${JSON.stringify(spaPrefix)})===0&&p!==${JSON.stringify(spaPrefix)}){location.replace(${JSON.stringify(spaPrefix)}+'?p='+encodeURIComponent(p+location.search+location.hash));}})();</script>`;
+    html = html.replace('<head>', `<head>\n    ${redirect}`);
+  }
   if (siteUrl && route.url !== '/404') {
     html = html.replace(
       '</head>',

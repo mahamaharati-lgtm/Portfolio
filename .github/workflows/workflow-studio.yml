@@ -3,9 +3,9 @@ name: workflow-studio
 on:
   push:
     branches: [main]
-    paths: ['workflow-studio/**', '.github/workflows/workflow-studio.yml']
+    paths: ["workflow-studio/**", ".github/workflows/workflow-studio.yml"]
   pull_request:
-    paths: ['workflow-studio/**', '.github/workflows/workflow-studio.yml']
+    paths: ["workflow-studio/**", ".github/workflows/workflow-studio.yml"]
   workflow_dispatch:
 
 permissions:

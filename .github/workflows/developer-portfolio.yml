@@ -3,9 +3,11 @@ name: developer-portfolio
 on:
   push:
     branches: [main]
-    paths: ['developer-portfolio/**', '.github/workflows/developer-portfolio.yml']
+    paths:
+      ["developer-portfolio/**", ".github/workflows/developer-portfolio.yml"]
   pull_request:
-    paths: ['developer-portfolio/**', '.github/workflows/developer-portfolio.yml']
+    paths:
+      ["developer-portfolio/**", ".github/workflows/developer-portfolio.yml"]
   workflow_dispatch:
 
 permissions:

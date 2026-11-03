@@ -1,0 +1,97 @@
+name: deploy-pages
+
+# Builds the portfolio and Workflow Studio, publishes both to GitHub Pages
+# (gh-pages branch), then verifies the live site in a real browser.
+on:
+  push:
+    branches: [main]
+    paths:
+      [
+        "developer-portfolio/**",
+        "workflow-studio/**",
+        "scripts/**",
+        ".github/workflows/deploy-pages.yml",
+      ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://mahamaharati-lgtm.github.io/Portfolio
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            workflow-studio/package-lock.json
+            developer-portfolio/package-lock.json
+      - name: Install
+        run: |
+          npm ci --prefix workflow-studio
+          npm ci --prefix developer-portfolio
+      - name: Unit tests
+        run: |
+          npm test --prefix workflow-studio
+          npm test --prefix developer-portfolio
+      - name: Build both sites
+        run: ./scripts/build-pages.sh
+      - name: Stamp build
+        run: echo "${GITHUB_SHA}" > site/version.txt
+      - name: Publish to gh-pages
+        working-directory: site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git init -q -b gh-pages
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Deploy ${GITHUB_SHA}"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for this build to be live
+        run: |
+          for i in $(seq 1 60); do
+            live="$(curl -fsSL "${SITE_URL}/version.txt?nocache=$RANDOM" 2>/dev/null || true)"
+            if [ "$live" = "${GITHUB_SHA}" ]; then echo "Live after ~$((i*10))s"; exit 0; fi
+            echo "Waiting for GitHub Pages ($i/60), currently: ${live:-not available}"
+            sleep 10
+          done
+          echo "::error::Site did not go live. Check Settings → Pages: source should be 'Deploy from a branch', branch 'gh-pages', folder '/'."
+          exit 1
+      - name: HTTP checks
+        run: |
+          for path in / /projects/workflow-studio /resume/Harshith-C-Shenoy-Resume.pdf /resume/Harshith-C-Shenoy-Resume.docx /workflow-studio/ /robots.txt /sitemap.xml; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "${SITE_URL}${path}")
+            echo "${code} ${SITE_URL}${path}"
+            [ "$code" = "200" ] || exit 1
+          done
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: developer-portfolio/package-lock.json
+      - run: npm ci
+        working-directory: developer-portfolio
+      - run: npx playwright install --with-deps chromium
+        working-directory: developer-portfolio
+      - name: Browser smoke test against the live site
+        run: node scripts/smoke-deploy.mjs "${SITE_URL}"
+        working-directory: developer-portfolio

@@ -1,3 +1,5 @@
+import { withBase } from '../lib/url';
+
 interface ThemeImageProps {
   /** Base name in /public/images, e.g. "ws-editor" → ws-editor-light-1600.webp */
   name: string;
@@ -28,8 +30,8 @@ export function ThemeImage({
         <img
           key={theme}
           className={`screenshot theme-img--${theme} w-full ${className}`}
-          src={`/images/${name}-${theme}-${large}.webp`}
-          srcSet={`/images/${name}-${theme}-${small}.webp ${small}w, /images/${name}-${theme}-${large}.webp ${large}w`}
+          src={withBase(`images/${name}-${theme}-${large}.webp`)}
+          srcSet={`${withBase(`images/${name}-${theme}-${small}.webp`)} ${small}w, ${withBase(`images/${name}-${theme}-${large}.webp`)} ${large}w`}
           sizes={sizes}
           width={width}
           height={height}

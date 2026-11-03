@@ -2,12 +2,13 @@ import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import { App } from './App';
+import { routerBasename } from './lib/url';
 import './index.css';
 
 const container = document.getElementById('root')!;
 const app = (
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={routerBasename}>
       <App />
     </BrowserRouter>
   </StrictMode>

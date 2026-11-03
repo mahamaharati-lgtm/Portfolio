@@ -1,3 +1,4 @@
+import { withBase } from '../lib/url';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
@@ -5,11 +6,11 @@ import { profile } from '../content/profile';
 import { ThemeSwitcher } from '../theme/ThemeSwitcher';
 
 const NAV = [
-  { href: '/#work', label: 'Work' },
-  { href: '/#about', label: 'About' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#contact', label: 'Contact' },
+  { href: withBase('#work'), label: 'Work' },
+  { href: withBase('#about'), label: 'About' },
+  { href: withBase('#experience'), label: 'Experience' },
+  { href: withBase('#skills'), label: 'Skills' },
+  { href: withBase('#contact'), label: 'Contact' },
 ];
 
 export function Header() {

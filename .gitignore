@@ -5,3 +5,4 @@ test-results
 .lighthouseci
 *.local
 .DS_Store
+site
